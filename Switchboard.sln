@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{878F7D54-552C-4D44-9C0D-58782054DF93}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\DotNetOpenAuth.Core.dll = Dependencies\DotNetOpenAuth.Core.dll
+		Dependencies\DotNetOpenAuth.OAuth2.Client.dll = Dependencies\DotNetOpenAuth.OAuth2.Client.dll
+		Dependencies\DotNetOpenAuth.OAuth2.ClientAuthorization.dll = Dependencies\DotNetOpenAuth.OAuth2.ClientAuthorization.dll
+		Dependencies\DotNetOpenAuth.OAuth2.dll = Dependencies\DotNetOpenAuth.OAuth2.dll
+		Dependencies\ExactOnline.Client.Models.dll = Dependencies\ExactOnline.Client.Models.dll
+		Dependencies\ExactOnline.Client.OAuth.dll = Dependencies\ExactOnline.Client.OAuth.dll
+		Dependencies\ExactOnline.Client.Sdk.dll = Dependencies\ExactOnline.Client.Sdk.dll
+		Dependencies\Google.Apis.Authentication.OAuth2.dll = Dependencies\Google.Apis.Authentication.OAuth2.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Caching.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Common.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Common.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Configuration.Design.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Configuration.Design.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Logging.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.CallHandlers.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.CallHandlers.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.Configuration.Design.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.Configuration.Design.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Security.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.Integration.AspNet.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.Integration.AspNet.dll
+		Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF.dll = Dependencies\Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF.dll
+		Dependencies\Microsoft.Practices.ObjectBuilder2.dll = Dependencies\Microsoft.Practices.ObjectBuilder2.dll
+		Dependencies\Microsoft.Practices.Unity.Configuration.dll = Dependencies\Microsoft.Practices.Unity.Configuration.dll
+		Dependencies\Microsoft.Practices.Unity.dll = Dependencies\Microsoft.Practices.Unity.dll
+		Dependencies\Microsoft.Practices.Unity.Interception.dll = Dependencies\Microsoft.Practices.Unity.Interception.dll
+		Dependencies\Microsoft.Practices.Unity.StaticFactory.dll = Dependencies\Microsoft.Practices.Unity.StaticFactory.dll
+		Dependencies\Newtonsoft.Json.dll = Dependencies\Newtonsoft.Json.dll
+		Dependencies\System.Net.Http.Extensions.dll = Dependencies\System.Net.Http.Extensions.dll
+		Dependencies\System.Net.Http.Primitives.dll = Dependencies\System.Net.Http.Primitives.dll
+		Dependencies\System.Runtime.Serialization.dll = Dependencies\System.Runtime.Serialization.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchboard", "Switchboard\Switchboard.csproj", "{22817C13-21E8-40A9-B9EC-8CB66A4DF7EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22817C13-21E8-40A9-B9EC-8CB66A4DF7EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22817C13-21E8-40A9-B9EC-8CB66A4DF7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22817C13-21E8-40A9-B9EC-8CB66A4DF7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22817C13-21E8-40A9-B9EC-8CB66A4DF7EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
