@@ -78,8 +78,8 @@ namespace Switchboard.Connectors
                 {
                     ///Running over the azure
                     string authRedirectURL = String.Empty;
-                    //authRedirectURL = "https://googledrivewatcher.azurewebsites.net/Home/SubscribeStorageChanges";
-                    authRedirectURL = "http://localhost:55410/Home/SubscribeStorageChanges";
+                    authRedirectURL = "https://googledrivewatcher.azurewebsites.net/Home/SubscribeStorageChanges";
+                    //authRedirectURL = "http://localhost:55410/Home/SubscribeStorageChanges";
                     if (!GoogleAuthInitialized())
                     {
                         //var Googleurl = "https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=offline&approval_prompt=force&redirect_uri=" + authRedirectURL + "&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&client_id=" + secrets.ClientId;
@@ -233,7 +233,7 @@ namespace Switchboard.Connectors
             {
                 ResourceId = userSettings.ResourceId,
                 Id = Guid.NewGuid().ToString(),
-                Address = _storageChangedNotificationRedirectURL,
+                Address = string.Concat(_storageChangedNotificationRedirectURL, "?user=", name),
                 Type = "web_hook"
                 //Expiration = 2*60*1000 //2 minutes??? Nope not quite work out!
             };
@@ -278,9 +278,10 @@ namespace Switchboard.Connectors
         /// <summary>
         /// Gets list of changes
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="resourceId"></param>
         /// <returns></returns>
-        public List<Item> GetChanges(string resourceId)
+        public List<Item> GetChanges(string name, string resourceId)
         {
             //TODO: Disable this for demo only
             //if (!Authorise()) { return null; }
@@ -299,7 +300,7 @@ namespace Switchboard.Connectors
             Switchboard.Notification.Instance.NotifyStorageChanges(changes);
             changes.ForEach(delegate (Item item)
             {
-                Switchboard.Notification.Instance.Notify(string.Concat(string.Format("You have {0} new changes on your drive in the cloud", changes.Count),
+                Switchboard.Notification.Instance.Notify(name, string.Concat(string.Format("You have {0} new changes on your drive in the cloud", changes.Count),
                     "New change to resource ", item.ResourceId, " please download here ", System.Web.HttpUtility.JavaScriptStringEncode(item.DownloadURL)));
             });
 
@@ -313,8 +314,9 @@ namespace Switchboard.Connectors
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="resourceId"></param>
-        public void Add(string resourceId)
+        public void Add(string name, string resourceId)
         {
             throw new NotImplementedException();
         }

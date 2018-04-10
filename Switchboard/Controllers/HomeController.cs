@@ -64,34 +64,38 @@ namespace Switchboard.Controllers
         /// <summary>
         /// Callback method from the cloud storage in the event of new watch changes
         /// </summary>
-        /// <param name="changes"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
         [ActionName("NotifyStorageChanges")]
-        public ActionResult NotifyStorageChanges(string changes)
+        public ActionResult NotifyStorageChanges(string user, string resourceId)
         {
+            Switchboard.Notification.Instance.Notify(user + "-" + resourceId);
             var resourceURI = this.HttpContext.Request.Headers["X-Goog-Resource-URI"];
-            string resourceId;
             string resourceState;
             if (resourceURI != null)
             {
                 resourceId = this.HttpContext.Request.Headers["X-Goog-Resource-ID"];
                 resourceState = this.HttpContext.Request.Headers["X-Goog-Resource-State"];
-                Switchboard.Notification.Instance.Notify(resourceId + "-" + resourceState + "-" + resourceURI);
+                Switchboard.Notification.Instance.Notify(user, resourceId + "-" + resourceState + "-" + resourceURI);
 
                 // Time to get list of changes
                 Switchboard.Connectors.IStorageConnector storage = ETL.PolicyInjection.PolicyInjection.Create<Connectors.GoogleDriveClient, Connectors.IStorageConnector>();
-                storage.GetChanges(resourceId);
+                storage.GetChanges(user, resourceId);
 
                 //Remember we are in the callback. Just redirect to ConnectDocumentCenter callback to make a copy of the changed documents into our designated documents center
-                return ConnectDocumentCenter(resourceId, null);
+                return ConnectDocumentCenter(user, resourceId, null);
+            }
+            else if (user== null)
+            {
+                //log the headers and details for investigations
+                ETL.Logging.Logger.Write(new ETL.Logging.LogEntry { Message = "Unknown request - " + user });
             }
             else
             {
-                //log the headers and details for investigations
-                ETL.Logging.Logger.Write(new ETL.Logging.LogEntry { Message = "Unknown request - " + changes });
+                return ConnectDocumentCenter(user, resourceId, null);
             }
-            return Content(changes);
+            return Content(user);
         }
 
         /// <summary>
@@ -101,20 +105,20 @@ namespace Switchboard.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName("ConnectDocumentCenter")]
-        public ActionResult ConnectDocumentCenter(string resourceId, string token)
+        public ActionResult ConnectDocumentCenter(string user, string resourceId, string token)
         {
             //TODO: if token is returned look up the resourceId against the token
             //If this is the straightforward invocation let's use the resourceId
             if (resourceId != null)
             {
-                Switchboard.Notification.Instance.Notify("Downloading changes to your document center");
+                Switchboard.Notification.Instance.Notify(user, "Downloading changes to your document center");
                 //Instantiate the document client via the connector
                 //TODO: Configure the unity container to be a factory to pickup the mapTo concrete class for the implementation so it can be Exact Online or Dropbox to make the copy of documents into
                 //This demo is to invoke the Exact document client and insert the newly added file there
                 Switchboard.Connectors.IStorageConnector documentClient = ETL.PolicyInjection.PolicyInjection.Create<Connectors.ExactDocumentClient, Connectors.IStorageConnector>();
 
                 /// TODO: encapsulate all session state access into the Session Information\User.cs
-                documentClient.Add(resourceId);
+                documentClient.Add(user, resourceId);
             }
             return Content(resourceId);
         }

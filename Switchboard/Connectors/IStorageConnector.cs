@@ -23,13 +23,15 @@ namespace Switchboard.Connectors
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="resourceId"></param>
-        List<Item> GetChanges(string resourceId);
+        List<Item> GetChanges(string name, string resourceId);
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="resourceId"></param>
-        void Add(string resourceId);
+        void Add(string name, string resourceId);
     }
 }

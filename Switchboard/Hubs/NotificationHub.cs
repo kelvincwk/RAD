@@ -23,6 +23,12 @@ namespace Switchboard
             _notification = notification;
         }
 
+        public void Register(string name)
+        {
+            Notification.Users[name] = this.Context.ConnectionId;
+            _notification.Notify(name, "Welcome back " + name);
+        }
+
         public void Notify(string name, string message)
         {
             _notification.Notify(name, message);
@@ -40,6 +46,7 @@ namespace Switchboard
         // Invoke singleton constructor
         private readonly static Lazy<Notification> _instance = new Lazy<Notification>(() => new Notification(GlobalHost.ConnectionManager.GetHubContext<NotificationHub>().Clients));
         private IHubConnectionContext Clients;
+        internal static System.Collections.Concurrent.ConcurrentDictionary<string, string> Users = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// Gets hold of clients
@@ -80,7 +87,17 @@ namespace Switchboard
         {
             // Call the addNewMessageToPage method to update clients.
             //TODO: This should be implemented to only notify the client in current client if name != "System"
-            Clients.All.addNewMessageToPage(name, message);
+            if (!string.Equals(name, __SYSTEM_ID))
+            {
+                string operatorConnectionId = null;
+                if (Notification.Users.TryGetValue(name, out operatorConnectionId)) {
+                    Instance.Clients.Client(operatorConnectionId).Notify(name, message);
+                }
+            }
+            else
+            {
+                Clients.All.addNewMessageToPage(name, message);
+            }
         }
         /// <summary>
         /// Notify client with storage chnages

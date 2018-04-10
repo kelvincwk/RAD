@@ -54,9 +54,13 @@ namespace Switchboard.Connectors
         /// <summary>
         /// Insert new document via the Exact online API
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="resourceId"></param>
-        public void Add(string resourceId)
+        public void Add(string name, string resourceId)
         {
+
+            Switchboard.Notification.Instance.Notify(name, "Trying to authorize throu Exact Online and add the new document");
+
             ///If unauthorised it will be going to the OAuth2 process then revisited again in the callback (see HomeController.cs)
             if (!Authorise())
             {
@@ -88,7 +92,7 @@ namespace Switchboard.Connectors
             }            
         }
 
-        public List<Item> GetChanges(string pageToken)
+        public List<Item> GetChanges(string name, string pageToken)
         {
             throw new NotImplementedException();
         }

@@ -16,12 +16,12 @@ namespace Switchboard.Connectors
         {
             throw new NotImplementedException();
         }
-        public void Add(string resourceId)
+        public void Add(string name, string resourceId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Item> GetChanges(string resourceId)
+        public List<Item> GetChanges(string name, string resourceId)
         {
             throw new NotImplementedException();
         }
