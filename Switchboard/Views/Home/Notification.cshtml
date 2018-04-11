@@ -3,11 +3,15 @@
 }
 <h2>Notification</h2>
 <div class="container">
-    Session:<input type="text" id="session" />
-    Type a message:<input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" />
-    <input type="hidden" id="displayname" /><img id="alerts" src="~/images/alerts.gif" class="alertsIcon hiddenControl" />
-    <input type="hidden" id="email" />
+    <div class="hiddenControl">
+        Session:<input type="text" id="session" />
+        Type a message:<input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Send" />
+        <input type="hidden" id="displayname" />
+    </div>
+    Google Account:
+    <input type="text" id="email" />
+    <img id="alerts" src="~/images/alerts.gif" class="alertsIcon hiddenControl" />
     @Html.ActionLink("Watch my storage", "SubscribeStorageChanges", new { name = "BOT", email = "kelvincheah06@gmail.com" })
     <ul id="console"></ul>
 </div>
@@ -17,11 +21,13 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">            
+    <div class="form-horizontal">
         <div class="form-group">
             <div>
-                User:<input type="text" name="user" />
-                ResourceId:<input type="text" name="resourceId" />
+                Session:
+                <input type="text" name="user" />
+                ResourceId:
+                <input type="text" name="resourceId" value="1 - pmMwwPf3eg07S_2W6MBKB1qI8RzUi9V" />
                 <input type="submit" value="NotifyStorageChanges" class="btn" />
             </div>
         </div>

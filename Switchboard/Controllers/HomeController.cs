@@ -70,14 +70,13 @@ namespace Switchboard.Controllers
         [ActionName("NotifyStorageChanges")]
         public ActionResult NotifyStorageChanges(string user, string resourceId)
         {
-            Switchboard.Notification.Instance.Notify(user + "-" + resourceId);
             var resourceURI = this.HttpContext.Request.Headers["X-Goog-Resource-URI"];
             string resourceState;
             if (resourceURI != null)
             {
                 resourceId = this.HttpContext.Request.Headers["X-Goog-Resource-ID"];
                 resourceState = this.HttpContext.Request.Headers["X-Goog-Resource-State"];
-                Switchboard.Notification.Instance.Notify(user, resourceId + "-" + resourceState + "-" + resourceURI);
+                Switchboard.Notification.Instance.Notify("Changes notified from " + resourceURI);
 
                 // Time to get list of changes
                 Switchboard.Connectors.IStorageConnector storage = ETL.PolicyInjection.PolicyInjection.Create<Connectors.GoogleDriveClient, Connectors.IStorageConnector>();
