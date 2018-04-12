@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Notification";
+    ViewBag.Title = "Sync Cloud Drives";
 }
-<h2>Notification</h2>
+<h2>@ViewBag.Title</h2>
 <div class="container">
     <div class="hiddenControl">
         Session:<input type="text" id="session" />
@@ -9,31 +9,46 @@
         <input type="button" id="sendmessage" value="Send" />
         <input type="hidden" id="displayname" />
     </div>
-    Google Account:
-    <input type="text" id="email" />
-    <img id="alerts" src="~/images/alerts.gif" class="alertsIcon hiddenControl" />
-    @Html.ActionLink("Watch my storage", "SubscribeStorageChanges", new { name = "BOT", email = "kelvincheah06@gmail.com" })
-    <ul id="console"></ul>
-</div>
-<h2>Mimic NotifyStorageChanges web_hook callback</h2>
-
-@using (Html.BeginForm("NotifyStorageChanges", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <div class="form-group">
             <div>
-                Session:
-                <input type="text" name="user" />
-                ResourceId:
-                <input type="text" name="resourceId" value="1 - pmMwwPf3eg07S_2W6MBKB1qI8RzUi9V" />
-                <input type="submit" value="NotifyStorageChanges" class="btn" />
+                Google Account:
+                <input type="text" id="email" />
+                <img id="alerts" src="~/images/alerts.gif" class="alertsIcon hiddenControl" />
+                <br /><br />
+                @Html.ActionLink("Sync Now", "SubscribeStorageChanges", new { name = "BOT", email = "kelvincheah06@gmail.com" }, new { @class = "btn btn-primary btn-large" })
+                &nbsp
+                @Html.ActionLink("Turn On Auto Sync", "SubscribeStorageChanges", new { name = "BOT", email = "kelvincheah06@gmail.com" }, new { @class = "btn btn-primary btn-large" })
+                <input type="radio" name="expiry" value="10" id="expiry1"><label for="expiry1">10 Mins</label>
+                <input type="radio" name="expiry" value="30" id="expiry2"><label for="expiry2">30 Mins</label>
+                <input type="radio" name="expiry" checked="checked" value="60" id="expiry3"><label for="expiry3">1 Hour</label>
+                <input type="radio" name="expiry" value="180" id="expiry4"><label for="expiry1">3 Hours</label>
             </div>
         </div>
     </div>
-}
-
+</div>
+<div class="hiddenControl">
+    <h2>Mimic NotifyStorageChanges web_hook callback</h2>
+    <div class="container">
+        @using (Html.BeginForm("NotifyStorageChanges", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div>
+                        Session:
+                        <input type="text" name="user" />
+                        ResourceId:
+                        <input type="text" name="resourceId" value="1 - pmMwwPf3eg07S_2W6MBKB1qI8RzUi9V" />
+                        <input type="submit" value="Notify Storage Changes" class="btn btn-primary btn-large" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<h4>Console</h4>
+<ul id="console"></ul>
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
