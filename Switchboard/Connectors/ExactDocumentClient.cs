@@ -29,7 +29,7 @@ namespace Switchboard.Connectors
         public ExactDocumentClient()
         {
             ///TODO: These all can be set in the web.config file and be transformed in the publishing scripts if required
-            _clientId = "4cb5d830 - 4192 - 4cbc - b245 - dff0c8ad18e2";
+            _clientId = "4cb5d830-4192-4cbc-b245-dff0c8ad18e2";
             _clientSecret = "mShp7gyt3Fz7";
             _storageAuthenticatedCallbackRedirectURL = "https://googledrivewatcher.azurewebsites.net/Home/ConnectDocumentCenter";
         }

@@ -42,7 +42,8 @@ namespace Switchboard.Connectors
             _scopes = new string[] { DriveService.Scope.Drive, DriveService.Scope.DriveAppdata, DriveService.Scope.DriveFile };
             ///TODO: These all can be set in the web.config file and be transformed in the publishing scripts if required
             _applicationName = "Google Drive API .NET Quickstart";
-            _storageChangedNotificationRedirectURL = @"https://googledrivewatcher.azurewebsites.net/Home/NotifyStorageChanges";
+            //_storageChangedNotificationRedirectURL = @"https://googledrivewatcher.azurewebsites.net/Home/NotifyStorageChanges";
+            _storageChangedNotificationRedirectURL = @"http://localhost:55410/Home/NotifyStorageChanges";
         }
 
         /// <summary>
@@ -78,8 +79,8 @@ namespace Switchboard.Connectors
                 {
                     ///Running over the azure
                     string authRedirectURL = String.Empty;
-                    authRedirectURL = "https://googledrivewatcher.azurewebsites.net/Home/SubscribeStorageChanges";
-                    //authRedirectURL = "http://localhost:55410/Home/SubscribeStorageChanges";
+                    //authRedirectURL = "https://googledrivewatcher.azurewebsites.net/Home/SubscribeStorageChanges";
+                    authRedirectURL = "http://localhost:55410/Home/SubscribeStorageChanges";
                     if (!GoogleAuthInitialized())
                     {
                         //var Googleurl = "https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=offline&approval_prompt=force&redirect_uri=" + authRedirectURL + "&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&client_id=" + secrets.ClientId;
